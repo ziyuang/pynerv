@@ -1,0 +1,80 @@
+The dredviz software package implements NeRV, a dimensionality reduction algorithm specifically designed for visualization, and some related quality measures, all developed by the Statistical Machine Learning and Bioinformatics group at the Department of Information and Computer Science, Aalto University (http://www.cis.hut.fi/projects/mi/sdm). See REFERENCES at the end of this file for a list of relevant publications.  Dredviz is currently maintained by Kristian Nybo (kristian.nybo@tkk.fi). 
+
+All the code by Kristian Nybo and Jarkko Venna (ie., everything outside of the subdirectory 'newmat') is released under the Lesser GNU Public License; see the file LICENSE for more information. Parts of dredviz use the newmat 10 library by Robert Davies (http://www.robertnz.net/nm10). For convenience, an unmodified copy of newmat 10 is distributed along with dredviz inside a subdirectory called 'newmat'. Robert Davies places no restrictions on the use of newmat; for details, see the file COPYING in the newmat subdirectory. 
+
+
+USING DREDVIZ
+
+To compile the software, simply type 'make all' in the source directory. You should end up with the following binaries:
+
+nerv - Projects a data set using NeRV (see [Venna2010,Venna2007]).
+lmds - Projects a data set using Local MDS (an older and more heuristic algorithm vaguely similar to NeRV; see [Venna2006]).
+pca - Projects a data set using Principal Components Analysis. 
+klmeasure - Computes smoothed precision and smoothed recall (see [Venna2010,Venna2007]).
+klrank - Computes rank-based smoothed precision/recall (see [Venna2010]).
+measure - Computes trustworthiness and continuity (see [Kaski2003]).
+
+Running any of the binaries above without any parameters will print brief
+instructions and a list of accepted parameters.
+
+PROJECTING A HIGH-DIMENSIONAL DATA SET WITH NERV
+
+To project a data set with NeRV, just change into the directory where the binaries are (by default the source directory) and type
+
+nerv --inputfile infilename --outputfile outfilename
+
+where and 'infilename' is the name of the file that contains the data vectors. (If your data set is a pairwise distance matrix, you can use the switch --inputdist instead.) The program will store the projection of your data set in the file specified by 'outfilename'.
+
+Your data set should be in SOM_PAK format; see below for an example. Lines beginning with a '#' are treated as comments and ignored. The first line in the file that is not a comment line specifies the dimension of the data set as a positive integer, '3' in the example. The rest of the file contains the actual data, with each line containing the coordinates of one data point as decimal numbers separated by whitespace.
+
+#sample SOM_PAK file
+#a three-dimensional data set with four data vectors
+3
+0.8147  0.6324  0.9575
+0.9058  0.0975  0.9649
+0.1270  0.2785  0.1576
+0.9134  0.5469  0.9706
+#end sample SOM_PAK file
+
+The output file will also be in SOM_PAK format.
+
+
+In addition to the required commandline switches --inputfile and --outputfile, each program supports a number of other optional switches; for a complete list of supported switches, run the relevant program with the switch --help. For NeRV, the most interesting switch for the end-user is probably --lambda, which allows the user to control the tradeoff between smoothed precision and smoothed recall. A lambda value close to 0 will emphasize precision, whereas a lambda value close to 1 will emphasize recall. The default value is 0.1.
+
+A NOTE ABOUT THE OUTPUT OF measure
+
+Here's a sample line of output from 'measure', the program used for 
+computing trustworthiness and continuity:
+
+20 0.000593553  0.000593553  0.000593553  0.015855  0.015855  0.015855
+
+The first column (20) is just the number of neighbors used to calculate
+trustworthiness and continuity. Column 2 is worst-case trustworthiness (see
+next paragraph), column 4 is best-case trustworthiness, and column 3 is the
+average of these two. Analogously, column 5 is worst-case continuity, column
+7 is best-case continuity, and column 6 is the average of the two. (Actually
+each column contains the number 1 - x, where x is the measure. For example,
+the trustworthiness in this case is actually 1 - 0.000593553  = 0.9994.)
+
+Best-case and worst-case measures only come into play when you use a
+projection method that tends to place many data points at exactly the same
+spot (particularly the SOM). In that case a data point in the projection
+will have several neighbors at exactly the same distance, and thus for some
+k there will be more than one way to choose a set of k nearest neighbors.
+`Best-case' trustworthiness is the value we get when we compute
+trustworthiness with the nearest-neighbors set that gives the highest
+trustworthiness; worst-case trustworthiness is the value we get when we use
+the set that gives the lowest.
+
+When you use NeRV or LMDS, the best-case and worst-case values will
+practically always be the same, but if you wanted to compute these measures
+for a projection method that may map more than one data point to the same
+point in the projection space, the distinction could be important.
+
+
+REFERENCES
+
+[Venna2010]: Jarkko Venna, Jaakko Peltonen, Kristian Nybo, Helena Aidos, and Samuel Kaski. Information Retrieval Perspective to Nonlinear Dimensionality Reduction for Data Visualization. Journal of Machine Learning Research, 11:451-490, 2010.
+[Venna2007]: Jarkko Venna and Samuel Kaski. Nonlinear Dimensionality Reduction as Information Retrieval. In Marina Meila and Xiaotong Shen, editors, Proceedings of AISTATS 2007, the 11th International Conference on Artificial Intelligence and Statistics. Omnipress, 2007. JMLR Workshop and Conference Proceedings, Volume 2: AISTATS 2007.
+[Venna2006]: Jarkko Venna and Samuel Kaski. Local multidimensional scaling. Neural Networks, 19, pp 889--899, 2006.
+[Kaski2003]: Samuel Kaski, Janne Nikkilä, Merja Oja, Jarkko Venna, Petri Törönen, and Eero Castren. Trustworthiness and metrics in visualizing similarity of gene expression. BMC Bioinformatics, 4:48, 2003.

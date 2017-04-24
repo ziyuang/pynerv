@@ -1,0 +1,1 @@
+To compile the software, simply type 'make all' at the top-level directory. The code should compile out of the box on any platform with any ANSI-compliant C++ compiler.

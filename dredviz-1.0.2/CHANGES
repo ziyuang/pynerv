@@ -1,0 +1,20 @@
+1.0.2:
+
+Bug fix: PCA now correctly returns the N *first* components, rather than the N last
+components as previously. 
+
+All code is now encapsulated in a namespace.
+
+randomdatagenerator.hh now correctly #includes <ctime> rather than locale.h. 
+
+1.0.0:
+
+NeRV is now much faster than previously (O(n^2) instead of O(n^3)).
+
+Added PCA: by default NeRV now uses PCA to initialize the projection (previously a random initialization was used, which may yield bad results for large or complicated data sets). PCA is implemented using the newmat library by Robert Davies (http://www.robertnz.net). Robert Davies places no restrictions on the use and distribution of newmat, so I have included it in the dredviz package.
+
+Added 'klmeasure' and 'klrank' for computing smoothed precision/recall and rank-based smoothed precision recall. 
+
+0.9.0:
+
+Initial release.
