@@ -34,6 +34,8 @@ private:
 
   Recorder recorder;
 
+  double finalCost;
+
 public:
   ConjugateGradientOpt (CostFunction & costFunc, LineSearch & lineSearch,
                         std::ostream & feedback);
@@ -46,6 +48,8 @@ public:
   void updateDynamicParameters (size_t currentRound, size_t totalRounds);
 
   void setIterationsPerStep (size_t number);
+
+  double getFinalCost() const;
 };
 }
 

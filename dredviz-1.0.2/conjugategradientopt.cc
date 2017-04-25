@@ -97,8 +97,9 @@ ConjugateGradientOpt::perform (DataMatrix & projData)
       recorder.record(projData); // Export current state of projection
   }
 
+  finalCost = costFunc.evaluate (projData);
   feedback << "Conjugate gradient step finished, cost now "
-  << costFunc.evaluate (projData) << std::endl;
+  << finalCost << std::endl;
 
 }
 
@@ -113,13 +114,13 @@ ConjugateGradientOpt::updateDynamicParameters (size_t, size_t)
 
 ConjugateGradientOpt::ConjugateGradientOpt (CostFunction & costFunc, LineSearch & linesearch, std::ostream & feedback):iterationsPerStep (DEFAULT_ITERATIONS), costFunc (costFunc),
     linesearch (linesearch), feedback (feedback),
-    previousStepSize (1.0),  record(false), recorder("foo")
+    previousStepSize (1.0),  record(false), recorder("foo"), finalCost(0.0)
 {
 }
 
 ConjugateGradientOpt::ConjugateGradientOpt (CostFunction & costFunc, LineSearch & linesearch, std::ostream & feedback, std::string filename_stem):iterationsPerStep (DEFAULT_ITERATIONS), costFunc (costFunc),
     linesearch (linesearch), feedback (feedback),
-    previousStepSize (1.0), record(true), recorder(filename_stem)
+    previousStepSize (1.0), record(true), recorder(filename_stem), finalCost(0.0)
 {
 }
 
@@ -127,5 +128,11 @@ void
 ConjugateGradientOpt::setIterationsPerStep (size_t number)
 {
   iterationsPerStep = number;
+}
+
+
+double ConjugateGradientOpt::getFinalCost () const
+{
+  return finalCost;
 }
 }

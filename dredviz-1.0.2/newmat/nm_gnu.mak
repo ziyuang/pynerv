@@ -1,6 +1,6 @@
 CXX = g++
 #original flags: CXXFLAGS = -O2 -Wall
-CXXFLAGS = -g -O3 -Wall -std=c++98 -pedantic 
+CXXFLAGS = -g -fPIC -O3 -Wall -std=c++14 -pedantic 
 
 DIFF = ./sdiff
 PRE = ./
