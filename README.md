@@ -6,8 +6,9 @@ Set up the paths in `Makefile` then `make`.
 
 ## Usage example
 
-    from nerv import NeRV
+    import numpy as np
     import matplotlib.pyplot as plt
+    from nerv import NeRV
     
     data = np.genfromtxt('dredviz-1.0.2/spheredata.dat', skip_header=1)
     color = np.genfromtxt('dredviz-1.0.2/spheredata.col', skip_header=1)
