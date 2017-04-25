@@ -6,7 +6,6 @@ PYTHON_INCLUDE_DIR = $(PYTHON_DIR)/include/python$(PYTHON_VERSION)m
 PYTHON_LINK_DIR = $(PYTHON_DIR)/lib
 LDFLAGS = -L$(PYTHON_LINK_DIR) -lpython$(PYTHON_VERSION)m
 PYBIND_INCLUDE_DIR = pybind11/include
-
 NERV_DIR = dredviz-1.0.2
 CXXFLAGS = -g -fPIC -O3 -Wall -std=c++14 -pedantic -I$(PYTHON_INCLUDE_DIR) -I$(NERV_DIR) -I$(PYBIND_INCLUDE_DIR) -I$(NERV_DIR)/newmat
 nerv-objects = $(addprefix ${NERV_DIR}/, sompackexporter.o datamatrix.o exception.o calculatedistancematrix.o euclidean.o euclideansquared.o randomdatagenerator.o sompackloader.o dataset.o distancematrix.o commandlineargs.o dynamicdouble.o conjugategradientopt.o goldensectionsearch.o nervcostfunction.o nervoptstrat.o nervprobability.o inputprobentropy.o nerv.o distancematrixloader.o recorder.o)
