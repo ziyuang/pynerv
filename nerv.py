@@ -54,7 +54,7 @@ class NeRV:
             `weights` should contain as many positive floating numbers as there are data points.
         :param initrad: 
             The initial value for the global radius parameter. 
-            The default is 1.5 * the maximum distance in the original data.
+            The default is 0.5 * the maximum distance in the original data.
         :param cg_steps: 
             The number of conjugate gradient steps to perform per iteration in NeRV's optimization scheme. 
             The default value is 2.
