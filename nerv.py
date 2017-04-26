@@ -6,6 +6,9 @@ from pynerv import nerv
 
 
 class NeRV:
+    """
+    A Python wrapper for Neighbor Retrieval Visualizer (NeRV)
+    """
     class NeRVInit(Enum):
         PCA = 0
         RandInit = 1
@@ -13,7 +16,7 @@ class NeRV:
     def __init__(self, n_components=2, lmbd=0.1, neighbors=20, init=NeRVInit.PCA, random_state=None, 
         metric='euclidean', iterations=10, weights=None, initrad=None, cg_steps=2, cg_steps_final=40, record_file_stem=None):
         """
-        A Python wrapper for Neighbor Retrieval Visualizer (NeRV)
+        Constructor of NeRV
         :param n_components: 
             The desired dimension of the output data. 
             It should be a positive integer. The default value for `n_components` is 2. 
@@ -82,12 +85,16 @@ class NeRV:
         self.embedding_ = None
 
         if random_state is not None:
-            print('Using {seed} as RNG seed.'.format(seed=random_state))
+            print('Using {seed} as RNG seed'.format(seed=random_state))
             np.random.seed(random_state)
         print('lambda = %g' % self.lmbd)
         print('Effective number of neighbors = %d' % self.neighbors)
 
     def fit(self, X):
+        """
+        Calculate the NeRV embedding (stored in `self.embedding_`) and final cost (stored in `self.cost_`) given the input. 
+        :param X: input data, can be either data points or data pairwise distances.
+        """
         X = np.asarray(X)
         n = X.shape[0]
 
@@ -127,6 +134,11 @@ class NeRV:
                  self.initrad, self.iterations, self.cg_steps, self.cg_steps_final, self.record_file_stem)
 
     def fit_transform(self, X):
+        """
+        Same as fit but additionally return the embedding
+        :param X: input data, can be either data points or data pairwise distances.
+        :return: the calculated embedding, also stored in `self.embedding_`.
+        """
         self.fit(X)
         return self.embedding_
 
@@ -135,7 +147,7 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     data = np.genfromtxt('dredviz-1.0.2/spheredata.dat', skip_header=1)
     color = np.genfromtxt('dredviz-1.0.2/spheredata.col', skip_header=1)
-    nerv_obj = NeRV()
+    nerv_obj = NeRV(random_state=0)
     nerv_obj.fit(data)
     print('Final cost = %g' % nerv_obj.cost_)
     plt.scatter(*nerv_obj.embedding_.T, c=color)

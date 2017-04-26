@@ -10,11 +10,7 @@ klrank-objects = datamatrix.o distancematrix.o calculatedistancematrix.o excepti
 
 pca-objects = sompackexporter.o datamatrix.o exception.o sompackloader.o dataset.o commandlineargs.o pcamain.o
 
-
-#CXXFLAGS = -O3 -g -Wall -std=c++98 -pedantic
-
-#CXXFLAGS = -g -O3 -Wall -std=c++98 -pedantic -march=pentium-m -msse3 -pipe -fomit-frame-pointer
-CXXFLAGS = -g -O3 -Wall -std=c++98 -pedantic -I ./newmat #-static -Lnewmat -lnewmat 
+CXXFLAGS = -O3 -fPIC -Wall -std=c++14 -pedantic -I ./newmat
 
 .PHONY: all clean newmat
 
