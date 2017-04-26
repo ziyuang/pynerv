@@ -12,8 +12,12 @@ Set up the paths in `Makefile` then `make`.
     
     data = np.genfromtxt('dredviz-1.0.2/spheredata.dat', skip_header=1)
     color = np.genfromtxt('dredviz-1.0.2/spheredata.col', skip_header=1)
-    nerv_obj = NeRV()
+    nerv_obj = NeRV(random_state=0)
     nerv_obj.fit(data)
     print('Final cost = %g' % nerv_obj.cost_)
     plt.scatter(*nerv_obj.embedding_.T, c=color)
     plt.show()
+
+which shows
+
+![spheredata](https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png)
