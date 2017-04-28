@@ -1,9 +1,13 @@
 # for Anaconda paths
 PYTHON_VERSION = $(shell python --version 2>&1 |cut -d' ' -f 2|cut -c 1-3)
-PYTHON_CONFIG = $(shell which python$(PYTHON_VERSION)-config)
 PYTHON_DIR = $(shell dirname $(shell which python))/..
+# for Python.h
 PYTHON_INCLUDE_DIR = $(PYTHON_DIR)/include/python$(PYTHON_VERSION)m
+# for libpythonx.ym.so
 PYTHON_LIB_DIR = $(PYTHON_DIR)/lib
+# for python-config
+PYTHON_CONFIG = $(shell which python$(PYTHON_VERSION)-config)
+
 PYBIND_INCLUDE_DIR = pybind11/include
 NERV_DIR = dredviz-1.0.2
 
