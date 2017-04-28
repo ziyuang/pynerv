@@ -19,5 +19,16 @@ Set up the paths in `Makefile` then `make`.
     plt.show()
 
 which shows
-
 ![spheredata](https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png)
+
+## Reference
+
+    @article{venna2010information,
+      title={Information retrieval perspective to nonlinear dimensionality reduction for data visualization},
+      author={Venna, Jarkko and Peltonen, Jaakko and Nybo, Kristian and Aidos, Helena and Kaski, Samuel},
+      journal={Journal of Machine Learning Research},
+      volume={11},
+      number={Feb},
+      pages={451--490},
+      year={2010}
+    }
