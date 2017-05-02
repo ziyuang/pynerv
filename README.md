@@ -18,8 +18,10 @@ Set up the paths in `Makefile` then `make`.
     plt.scatter(*nerv_obj.embedding_.T, c=color)
     plt.show()
 
-which shows
-![spheredata](https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png)
+which shows (right)
+
+<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png" width="341px"></img>&nbsp;
+<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata_nerv.png" width="341px"></img>
 
 ## Reference
 
