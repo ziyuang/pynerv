@@ -20,8 +20,8 @@ Set up the paths in `Makefile` then `make`.
 
 which shows (right)
 
-<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png" width="341px"></img>&nbsp;
-<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata_nerv.png" width="341px"></img>
+<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata.png" height="336px"></img>&nbsp;
+<img src="https://raw.githubusercontent.com/ziyuang/pynerv/master/spheredata_nerv.png" height="336px"></img>
 
 ## Reference
 
