@@ -150,5 +150,6 @@ if __name__ == '__main__':
     nerv_obj = NeRV(random_state=0)
     nerv_obj.fit(data)
     print('Final cost = %g' % nerv_obj.cost_)
+    plt.gca().set_aspect('equal')
     plt.scatter(*nerv_obj.embedding_.T, c=color)
     plt.show()
